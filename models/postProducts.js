@@ -12,6 +12,7 @@ const productSchema = mongoose.Schema({
     type: Number,
     default: 0,
   },
+  page: Number,
   createdAt: {
     type: Date,
     default: new Date(),
