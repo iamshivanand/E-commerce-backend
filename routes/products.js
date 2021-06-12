@@ -1,5 +1,5 @@
 import express from "express";
-import { getProducts, createProduct } from "../controllers/products.js";
+import { getProducts, createProduct,searchProducts } from "../controllers/products.js";
 import postProduct from "../models/postProducts.js";
 const router = express.Router();
 
@@ -8,6 +8,9 @@ router.get("/", paginatedResults(postProduct), getProducts);
 
 //this route is for creating a product
 router.post("/", createProduct);
+
+//this route is for the search
+router.get("/search/:name",searchProducts);
 
 export default router;
 function paginatedResults(model) {
