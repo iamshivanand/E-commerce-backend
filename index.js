@@ -3,6 +3,9 @@ import cors from "cors";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import postProductsRoutes from "./routes/products.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
@@ -12,13 +15,17 @@ app.use(cors());
 
 //we should always specify routes after cors
 app.use("/products", postProductsRoutes);
-
+app.get("/", (req, res) => {
+  res.send(
+    "/products for all the products and /products/search/:name for search"
+  );
+});
 const PORT = process.env.PORT || 8000;
-const CONNECTION_URL =
-  "mongodb+srv://Shiv:O0U6uGxZBqrSaWpz@personal.pmaoi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+// const CONNECTION_URL =
+//   "mongodb+srv://Shiv:O0U6uGxZBqrSaWpz@personal.pmaoi.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 mongoose
-  .connect(CONNECTION_URL, {
+  .connect(process.env.CONNECTION_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
